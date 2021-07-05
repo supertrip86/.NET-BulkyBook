@@ -199,3 +199,11 @@ body {
     width: 210px !important;
     margin: 0 auto;
 }
+
+.control-link {
+    cursor: pointer;
+}
+
+.upsert-row {
+    padding-bottom: 10px;
+}
