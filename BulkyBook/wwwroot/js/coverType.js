@@ -12,7 +12,7 @@ function loadDataTable() {
         },
         "columns": [
             {
-                "data": "title",
+                "data": "name",
                 "width": "60%"
             },
             {
