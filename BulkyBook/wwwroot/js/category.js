@@ -4,44 +4,47 @@ $(document).ready(function () {
     loadDataTable();
 });
 
-
 function loadDataTable() {
+
     dataTable = $('#tblData').DataTable({
         "ajax": {
             "url": "/Admin/Category/GetAll"
         },
         "columns": [
-            { "data": "name", "width": "60%" },
+            {
+                "data": "title",
+                "width": "60%"
+            },
             {
                 "data": "id",
+                "width": "40%",
                 "render": function (data) {
                     return `
-                            <div class="text-center">
-                                <a href="/Admin/Category/Upsert/${data}" class="btn btn-success text-white" style="cursor:pointer">
-                                    <i class="fas fa-edit"></i> 
-                                </a>
-                                <a onclick=Delete("/Admin/Category/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer">
-                                    <i class="fas fa-trash-alt"></i> 
-                                </a>
-                            </div>
-                           `;
-                }, "width": "40%"
+                        <div class="text-center">
+                            <a href="/Admin/Category/Upsert/${data}" class="btn btn-success text-white control-link">
+                                <i class="fas fa-edit"></i> 
+                            </a>
+                            <a onclick=Delete("/Admin/Category/Delete/${data}") class="btn btn-danger text-white control-link">
+                                <i class="fas fa-trash-alt"></i> 
+                            </a>
+                        </div>
+                    `;
+                }
             }
         ]
     });
 }
 
 function Delete(url) {
-    swal({
-        title: "Are you sure you want to Delete?",
-        text: "You will not be able to restore the data!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true
-    }).then((willDelete) => {
-        if (willDelete) {
+    Swal.fire({
+        icon: 'warning',
+        title: 'Are you sure?',
+        text: 'Once deleted, you will not be able to recover',
+        showCancelButton: true
+    }).then((result) => {
+        if (result.isConfirmed) {
             $.ajax({
-                type: "DELETE",
+                type: "delete",
                 url: url,
                 success: function (data) {
                     if (data.success) {
