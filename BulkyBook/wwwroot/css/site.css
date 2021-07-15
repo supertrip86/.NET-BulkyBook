@@ -204,6 +204,10 @@ body {
     cursor: pointer;
 }
 
+.lock-unlock {
+    width: 100px;
+}
+
 .upsert-row {
     padding-bottom: 10px;
 }
